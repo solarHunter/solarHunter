@@ -26,6 +26,7 @@ int main() {
   SDL_RenderPresent(ren);
   SDL_Delay(5000);
   
+  SDL_DestroyTexture(grid);
   SDL_DestroyRenderer(ren);
   SDL_DestroyWindow(win);
   utils::quitSDL();
