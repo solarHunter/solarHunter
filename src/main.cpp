@@ -1,9 +1,34 @@
-#include <stdlib.h>
 #include <time.h>
-#include <iostream>
+
+#include "headers.h"
 #include "utils.h"
+#include "assets.h"
 
 int main() {
   srand(time(NULL));
-  std::cout << "testing " << utils::randI32(0, 10) << std::endl;
+
+  SDL_Window *win = nullptr;
+  SDL_Renderer *ren = nullptr;
+  if (utils::initializeSDL(&win, &ren) != 0) {
+    SDL_DestroyRenderer(ren);
+    SDL_DestroyWindow(win);
+    utils::quitSDL();
+    return 0;
+  }
+
+  SDL_Texture *grid = Texture::load("./media/grid.png", ren);
+
+  SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
+  SDL_RenderClear(ren);
+
+  Texture::render(grid, ren, 0, 0, WINDOW_W, WINDOW_H);
+
+  SDL_RenderPresent(ren);
+  SDL_Delay(5000);
+  
+  SDL_DestroyRenderer(ren);
+  SDL_DestroyWindow(win);
+  utils::quitSDL();
+
+  return 0;
 }

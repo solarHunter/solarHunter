@@ -14,11 +14,11 @@ ifneq ($(filter arm%,$(UNAME_M)),)
 endif
 
 ifeq ($(OS), Darwin)
-SDL_INCLUDE = -I/Library/Frameworks/SDL2.framework/Headers
-SDL_LIB = -framework SDL2
+SDL_INCLUDE = -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_ttf.framework/Headers
+SDL_LIB = -framework SDL2 -framework SDL2_image -framework SDL2_ttf
 else
-SDL_INCLUDE = -I/usr/local/include
-SDL_LIB = -L/usr/local/lib -lSDL2 -Wl,-rpath=/usr/local/lib
+SDL_INCLUDE = -I/usr/include/SDL2
+SDL_LIB = -L/usr/local/lib -lSDL2_image -lSDL2_ttf -lSDL2main -lSDL2
 endif
 
 CXX = g++
@@ -31,12 +31,12 @@ OUT_DIR = bin/$(OS)/$(ARCH)
 
 
 # Files
-OBJS := src/utils.o src/main.o
+OBJS := src/utils.o src/assets.o src/main.o
 
 
-all: bindist $(EXE) cleanobj
+all: bindir $(EXE) mediadir cleanobj
 
-keep: bindist $(EXE)
+keep: bindir $(EXE) mediadir
 
 $(EXE): $(OBJS)
 	$(CXX) $^ $(LDFLAGS) -o $(OUT_DIR)/$@
@@ -44,7 +44,10 @@ $(EXE): $(OBJS)
 %.o: %.c
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-bindist: ${OUT_DIR}
+mediadir:
+	cp -rvip ./media $(OUT_DIR)/media
+
+bindir: ${OUT_DIR}
 
 ${OUT_DIR}:
 	${MKDIR_P} ${OUT_DIR}
