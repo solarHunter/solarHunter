@@ -18,11 +18,37 @@ int main() {
   wrapper::Renderer ren(&win);
   SDL_Texture *grid = ren.loadTexture("./media/grid.png");
 
-  ren.clear();
-  ren.renderTexture(grid, 0, 0, WINDOW_W, WINDOW_H);
-  ren.present();
+  unsigned int now = SDL_GetPerformanceCounter();
+  unsigned int last = 0;
+  double deltatime = 0;
 
-  SDL_Delay(5000);
+  unsigned int x = 0;
+  SDL_Event e;
+  bool running = true;
+  while (running) {
+    while(SDL_PollEvent(&e)){
+      if (e.type == SDL_QUIT) {running = false;}
+      if (e.type == SDL_KEYDOWN){
+        switch (e.key.keysym.scancode) {
+          case 41:
+            running = false;
+            break;
+        }
+      }
+    }
+
+    last = now;
+    now = SDL_GetPerformanceCounter();
+    deltatime = (double)((now - last) * 1000 / SDL_GetPerformanceFrequency());
+
+    x += 1 * deltatime;
+    if (x > 1020) x = 0;
+
+    ren.clear();
+    ren.renderTexture(grid, x - 1020, 0);
+    ren.renderTexture(grid, x, 0);
+    ren.present();
+  }
   
   SDL_DestroyWindow(win);
   utils::quitSDL();
