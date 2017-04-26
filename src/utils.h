@@ -5,7 +5,7 @@
 namespace utils {
   int randI32(const int, const int);
 
-  int initializeSDL(SDL_Window**, SDL_Renderer**);
+  int initializeSDL(SDL_Window**);
   void quitSDL(void);
 }
 

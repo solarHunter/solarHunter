@@ -2,32 +2,28 @@
 
 #include "headers.h"
 #include "utils.h"
-#include "assets.h"
+
+#include "wrappers/renderer.hpp"
 
 int main() {
   srand(time(NULL));
 
   SDL_Window *win = nullptr;
-  SDL_Renderer *ren = nullptr;
-  if (utils::initializeSDL(&win, &ren) != 0) {
-    SDL_DestroyRenderer(ren);
+  if (utils::initializeSDL(&win) != 0) {
     SDL_DestroyWindow(win);
     utils::quitSDL();
     return 0;
   }
 
-  SDL_Texture *grid = Texture::load("./media/grid.png", ren);
+  wrapper::Renderer ren(&win);
+  SDL_Texture *grid = ren.loadTexture("./media/grid.png");
 
-  SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
-  SDL_RenderClear(ren);
+  ren.clear();
+  ren.renderTexture(grid, 0, 0, WINDOW_W, WINDOW_H);
+  ren.present();
 
-  Texture::render(grid, ren, 0, 0, WINDOW_W, WINDOW_H);
-
-  SDL_RenderPresent(ren);
   SDL_Delay(5000);
   
-  SDL_DestroyTexture(grid);
-  SDL_DestroyRenderer(ren);
   SDL_DestroyWindow(win);
   utils::quitSDL();
 

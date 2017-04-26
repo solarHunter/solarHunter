@@ -31,7 +31,7 @@ OUT_DIR = bin/$(OS)/$(ARCH)
 
 
 # Files
-OBJS := src/utils.o src/assets.o src/main.o
+OBJS := src/utils.o src/wrappers/renderer.o src/main.o
 
 
 all: bindir $(EXE) mediadir cleanobj
@@ -45,7 +45,7 @@ $(EXE): $(OBJS)
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 mediadir:
-	cp -rvip ./media $(OUT_DIR)/media
+	cp -rvp ./media $(OUT_DIR)/
 
 bindir: ${OUT_DIR}
 
@@ -53,7 +53,7 @@ ${OUT_DIR}:
 	${MKDIR_P} ${OUT_DIR}
 
 cleanobj:
-	rm -f **/*.o
+	find . -type f -name '*.o' -exec rm {} +
 
 clean: cleanobj
 	rm -rf bin
