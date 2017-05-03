@@ -5,6 +5,7 @@ class TestScene : public Engine::State::CState {
   public:
     void Init() {
       grid = Crunch::Graphics.Textures.Load("./media/grid.png");
+      spaceship = Crunch::Graphics.Textures.Load("./media/spaceship.png");
     };
     void Cleanup() {};
 
@@ -18,16 +19,16 @@ class TestScene : public Engine::State::CState {
             game -> Quit();
             break;
           case 26:
-            std::cout << "W!!" << std::endl;
+            this -> y += 2;
             break;
           case 7:
-            std::cout << "D!!" << std::endl;
+            this -> x -= 2;
             break;
           case 22:
-            std::cout << "S!!" << std::endl;
+            this -> y -= 2;
             break;
           case 4:
-            std::cout << "A!!" << std::endl;
+            this -> x += 2;
             break;
           default:
             std::cout << "Input: " << game -> event.key.keysym.scancode << std::endl;
@@ -38,12 +39,14 @@ class TestScene : public Engine::State::CState {
 
     void Draw(Engine::State::CStateEngine* game) {
       Crunch::Graphics.Clear();
-      Crunch::Graphics.Textures.Draw(grid, 0, 0, 300, 300);
+
+      Crunch::Graphics.Textures.Draw(grid, this -> x, this -> y, WINDOW_W, WINDOW_H);
+      Crunch::Graphics.Textures.Draw(spaceship, WINDOW_W / 2 - 30, WINDOW_H / 2 - 45, 60, 90);
+
       Crunch::Graphics.Present();
     };
 
-    void Update(Engine::State::CStateEngine *game) {
-    }
+    void Update(Engine::State::CStateEngine *game) {}
 
     static TestScene* Instance() {
       return &m_testscene;
@@ -54,6 +57,7 @@ class TestScene : public Engine::State::CState {
 
   private:
     static TestScene m_testscene;
-    int grid;
+    int grid, spaceship;
+    int x, y;
 };
 TestScene TestScene::m_testscene;
