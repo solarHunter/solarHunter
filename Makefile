@@ -5,7 +5,7 @@ ifeq ($(UNAME_M),x86_64)
 	ARCH_FLAG = -m64
 endif
 ifneq ($(filter %86,$(UNAME_M)),)
-	ARCH = i386
+	ARCH = x86
 	ARCH_FLAG = -m32
 endif
 ifneq ($(filter arm%,$(UNAME_M)),)
@@ -29,16 +29,19 @@ EXE = solarHunter
 MKDIR_P = mkdir -p
 OUT_DIR = bin/$(OS)/$(ARCH)
 
-
 # Files
-OBJS := src/utils.o src/wrappers/renderer.o src/main.o
+O_STATE := src/engine/state/stateEngine.o
+O_GRAPHICS := src/engine/graphics/graphics.o src/engine/graphics/textures.o
+O_ENGINE := $(O_GRAPHICS) $(O_STATE)
+
+OBJS := src/main.o
 
 
 all: bindir $(EXE) mediadir cleanobj
 
 keep: bindir $(EXE) mediadir
 
-$(EXE): $(OBJS)
+$(EXE): $(O_ENGINE) $(OBJS)
 	$(CXX) $^ $(LDFLAGS) -o $(OUT_DIR)/$@
 
 %.o: %.c
