@@ -66,7 +66,8 @@ Engine::Graphics::CGraphics::~CGraphics() {
 }
 
 void Engine::Graphics::CGraphics::Clear() {
-  SDL_SetRenderDrawColor(this -> renderer, 255, 255, 255, 255);
+  // SDL_SetRenderDrawColor(this -> renderer, 255, 255, 255, 255);
+  SDL_SetRenderDrawColor(this -> renderer, 0, 0, 0, 255);
   SDL_RenderClear(this -> renderer);
 }
 

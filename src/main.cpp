@@ -1,10 +1,9 @@
 #include "engine/engine.hpp"
 
-// States
-#include "states/test.hpp"
+#include "states/initialMenu.hpp"
 
 int main() {
-  Crunch::State.ChangeState(TestScene::Instance());
+  Crunch::State.ChangeState(InitialMenuScene::Instance());
 
   while (Crunch::State.Running()) {
     Crunch::State.HandleEvents();

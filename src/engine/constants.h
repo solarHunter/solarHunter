@@ -10,4 +10,6 @@
   #define VSYNC           1
   #define HW_ACCELERATED  1
 
+  #define MEDIA_FOLDER "media/"
+
 #endif

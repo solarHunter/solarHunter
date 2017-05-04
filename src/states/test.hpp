@@ -1,10 +1,15 @@
+#ifndef H_STATES_TESTSCENE
+#define H_STATES_TESTSCENE
+
 #include "../engine/engine.hpp"
 #include <iostream>
+#include "initialMenu.hpp"
 
 class TestScene : public Engine::State::CState {
   public:
     void Init() {
-      grid = Crunch::Graphics.Textures.Load("./media/grid.png");
+      std::cout << "Generated TestScene" << std::endl;
+      stars = Crunch::Graphics.Textures.Load("./media/stars.png");
       spaceship = Crunch::Graphics.Textures.Load("./media/spaceship.png");
     };
     void Cleanup() {};
@@ -40,7 +45,7 @@ class TestScene : public Engine::State::CState {
     void Draw(Engine::State::CStateEngine* game) {
       Crunch::Graphics.Clear();
 
-      Crunch::Graphics.Textures.Draw(grid, this -> x, this -> y, WINDOW_W, WINDOW_H);
+      Crunch::Graphics.Textures.Draw(stars, this -> x - 600, this -> y - 600);
       Crunch::Graphics.Textures.Draw(spaceship, WINDOW_W / 2 - 30, WINDOW_H / 2 - 45, 60, 90);
 
       Crunch::Graphics.Present();
@@ -57,7 +62,9 @@ class TestScene : public Engine::State::CState {
 
   private:
     static TestScene m_testscene;
-    int grid, spaceship;
+    int stars, spaceship;
     int x, y;
 };
 TestScene TestScene::m_testscene;
+
+#endif
