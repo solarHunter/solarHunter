@@ -22,32 +22,38 @@ class InitialMenuScene : public Engine::State::CState {
   public:
     void Init() {
       std::cout << "Generated menuScene" << std::endl;
-      kiss_array_new(&this -> objects);
 
-      int err = kiss_init(&Crunch::Graphics.window, &Crunch::Graphics.renderer, &objects, 320, 120);
-      if (err) std::cout << "ERROR loading kiss_sdl" << std::endl;
+      kiss_array_new(&this -> objects);
+      if (kiss_init(&Crunch::Graphics.window, &Crunch::Graphics.renderer, &objects, 320, 120)) {
+        std::cout << "ERROR loading kiss_sdl" << std::endl;
+      }
 
       kiss_window_new(&window, NULL, 0, 0, 0, WINDOW_W, WINDOW_H);
 
-      strcpy(message, "SolarHunter");
       kiss_label_new(
           &label, &window, message,
           (window.rect.w / 2) - strlen(message) * kiss_textfont.advance / 2,
           (window.rect.h / 3)
       );
       label.textcolor.r = 255;
+      label.textcolor.g = 255;
+      label.textcolor.b = 255;
+
       kiss_button_new(
           &button_ini, &window, (char*)"INICIAR",
           window.rect.w / 2 - kiss_normal.w / 2,
           label.rect.y + kiss_textfont.fontheight + kiss_normal.h
       );
+
       kiss_button_new(
           &button_exit, &window, (char*)"SALIR",
           window.rect.w / 2 - kiss_normal.w / 2,
           button_ini.rect.y + kiss_textfont.fontheight + kiss_normal.h
       );
+
       window.visible = 1;
     };
+
     void Cleanup() {
       kiss_clean(&objects);
       std::cout << "initialMenu cleanup" << std::endl;
@@ -89,7 +95,7 @@ class InitialMenuScene : public Engine::State::CState {
     kiss_window window;
     kiss_label label = {0};
     kiss_button button_ini = {0}, button_exit = {0};
-    char message[KISS_MAX_LENGTH];
+    char message[KISS_MAX_LENGTH]{"SolarHunter"};
     int draw = 1;
 };
 InitialMenuScene InitialMenuScene::m_initialmenuscene;
