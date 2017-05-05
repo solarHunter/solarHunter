@@ -19,6 +19,7 @@ namespace Engine {
         void Draw(int id);
         void Draw(int id, int x, int y);
         void Draw(int id, int x, int y, int w, int h);
+        void Draw(int id, int x, int y, int w, int h, double angle);
       private:
         SDL_Renderer *renderer;
         std::vector<SDL_Texture*> textures;

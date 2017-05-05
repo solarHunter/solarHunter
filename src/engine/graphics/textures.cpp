@@ -63,3 +63,16 @@ void Engine::Graphics::CTexture::Draw(int id) {
   SDL_QueryTexture(this -> textures[id], NULL, NULL, &dest.w, &dest.h);
   SDL_RenderCopy(this -> renderer, this -> textures[id], NULL, &dest);
 }
+
+void Engine::Graphics::CTexture::Draw(int id, int x, int y, int w, int h, double angle) {
+    SDL_Rect dest;
+    dest.x = x;
+    dest.y = y;
+    dest.w = w;
+    dest.h = h;
+
+    SDL_RendererFlip flipType = SDL_FLIP_NONE;
+
+    SDL_QueryTexture(this -> textures[id], NULL, NULL, &dest.w, &dest.h);
+    SDL_RenderCopyEx(this -> renderer, this -> textures[id], NULL, &dest, angle, NULL, flipType );
+}

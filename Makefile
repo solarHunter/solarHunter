@@ -22,7 +22,7 @@ SDL_LIB = -L/usr/local/lib -lSDL2_image -lSDL2_ttf -lSDL2main -lSDL2
 endif
 
 CXX = g++
-CXXFLAGS = -Wall -pedantic $(ARCH_FLAG) -c -std=c++11 $(SDL_INCLUDE)
+CXXFLAGS = -Wall -pedantic $(ARCH_FLAG) -fpermissive -c -std=c++11 $(SDL_INCLUDE)
 LDFLAGS = $(SDL_LIB) $(ARCH_FLAG)
 EXE = solarHunter
 
