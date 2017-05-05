@@ -1,27 +1,27 @@
 
-[![Gitter chat](https://badges.gitter.im/gitterHQ/services.png)](https://gitter.im/gitterHQ/services)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/services.png)](https://gitter.im/solarHunter/Lobby)
 
 
-# LINUX DEPS
+## LINUX DEPS
 
 - libsdl2-dev
 - libsdl2-image-dev
 - libsdl2-ttf-dev
 
-# DARWIN DEPS
+## DARWIN DEPS
 
 - SDL2(dev)
 - SDL2_IMG(dev)
 - SDL2_TTF(dev)
 
-# BUILD
+## BUILD
 
 `$ make`
 
-# CLEANUP
+## CLEANUP
 
 `$ make clean`
 
-# OBJ KEEP AFTER LINK
+## OBJ KEEP AFTER LINK
 
 `$ make keep`
