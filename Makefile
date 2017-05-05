@@ -60,4 +60,7 @@ cleanobj:
 	find . -type f -name '*.o' -exec rm {} +
 
 clean: cleanobj
+	rm -rf $(OUT_DIR)
+
+cleanall: cleanobj
 	rm -rf bin
