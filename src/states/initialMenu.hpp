@@ -95,7 +95,7 @@ class InitialMenuScene : public Engine::State::CState {
     kiss_window window;
     kiss_label label = {0};
     kiss_button button_ini = {0}, button_exit = {0};
-    char message[KISS_MAX_LENGTH]{"SolarHunter"};
+    char *message = (char*)"SolarHunter\0";
     int draw = 1;
 };
 InitialMenuScene InitialMenuScene::m_initialmenuscene;
