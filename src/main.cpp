@@ -1,5 +1,4 @@
 #include "engine/engine.hpp"
-CrunchEngine Crunch;
 
 #include "states/initialMenu.hpp"
 

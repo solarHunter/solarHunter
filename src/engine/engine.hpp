@@ -11,5 +11,6 @@ class CrunchEngine {
     Engine::Graphics::CGraphics Graphics;
     Engine::State::CStateEngine State;
 };
+extern CrunchEngine Crunch;
 
 #endif

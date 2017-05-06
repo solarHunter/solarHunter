@@ -10,6 +10,8 @@
   #define VSYNC           1
   #define HW_ACCELERATED  1
 
-  #define MEDIA_FOLDER "media/"
+  #define MEDIA_FOLDER    "media/"
+
+  #define PI              3.14159265;
 
 #endif

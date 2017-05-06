@@ -22,7 +22,7 @@ SDL_LIB = -L/usr/local/lib -lSDL2_image -lSDL2_ttf -lSDL2main -lSDL2
 endif
 
 CXX = g++
-CXXFLAGS = -Wall -pedantic $(ARCH_FLAG) -fpermissive -c -std=c++11 $(SDL_INCLUDE)
+CXXFLAGS = -Wall -pedantic $(ARCH_FLAG) -std=c++11 $(SDL_INCLUDE)
 LDFLAGS = $(SDL_LIB) $(ARCH_FLAG)
 EXE = solarHunter
 
@@ -35,18 +35,20 @@ O_GRAPHICS := src/engine/graphics/graphics.o src/engine/graphics/textures.o
 O_GUI := src/engine/gui/kiss_general.o src/engine/gui/kiss_posix.o src/engine/gui/kiss_widgets.o src/engine/gui/kiss_draw.o
 O_ENGINE := $(O_GRAPHICS) $(O_GUI) $(O_STATE)
 
-OBJS := src/main.o
+OBJS := src/main.cpp src/states/initialMenu.cpp src/states/test.cpp
 
 
-all: bindir $(EXE) mediadir cleanobj
+all: bindir engine build mediadir cleanobj
+keep: bindir engine build mediadir
 
-keep: bindir $(EXE) mediadir
+engine: $(O_ENGINE)
+	ar cr src/engine/engine.a $^
 
-$(EXE): $(O_ENGINE) $(OBJS)
-	$(CXX) $^ $(LDFLAGS) -o $(OUT_DIR)/$@
+build:
+	g++ $(CXXFLAGS) src/engine/engine.a $(OBJS) $(SDL_LIB) -o $(OUT_DIR)/$(EXE)
 
 %.o: %.c
-	$(CXX) $(CXXFLAGS) $< -o $@
+	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 mediadir:
 	cp -rvp ./media $(OUT_DIR)/
