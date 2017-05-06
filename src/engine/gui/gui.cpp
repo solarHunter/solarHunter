@@ -7,6 +7,7 @@ Engine::Gui::CGui::CGui() {}
 
 Engine::Gui::CGui::~CGui() {
   kiss_clean(&this -> objects);
+  std::cout << "GUI Cleanup" << std::endl;
 }
 
 int Engine::Gui::CGui::Init(SDL_Renderer **renderer) {

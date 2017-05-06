@@ -27,7 +27,7 @@ class InitialMenuScene : public Engine::State::CState {
     kiss_window window;
     kiss_label label = {0};
     kiss_button button_ini = {0}, button_exit = {0};
-    char *message = (char*)"SolarHunter\0";
+    char *message = (char*)"SolarHunter " VERSION "\0";
     int draw = 1;
 
     void button_ini_event(kiss_button *button, SDL_Event *e, int *draw, Engine::State::CStateEngine* state);

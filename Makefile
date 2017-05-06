@@ -13,6 +13,8 @@ ifneq ($(filter arm%,$(UNAME_M)),)
 	ARCH_FLAG = -m32
 endif
 
+VERSION := 0.0.$(shell git rev-list --count origin master)-$(ARCH)
+
 ifeq ($(OS), Darwin)
 SDL_INCLUDE = -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_ttf.framework/Headers
 SDL_LIB = -framework SDL2 -framework SDL2_image -framework SDL2_ttf
@@ -22,12 +24,12 @@ SDL_LIB = -L/usr/local/lib -lSDL2_image -lSDL2_ttf -lSDL2main -lSDL2
 endif
 
 CXX = g++
-CXXFLAGS = -Wall -pedantic $(ARCH_FLAG) -std=c++11 $(SDL_INCLUDE)
+CXXFLAGS = -Wall -pedantic -DVERSION="\"$(VERSION)\"" $(ARCH_FLAG) -std=c++11 $(SDL_INCLUDE)
 LDFLAGS = $(SDL_LIB) $(ARCH_FLAG)
 EXE = solarHunter
 
 MKDIR_P = mkdir -p
-OUT_DIR = bin/$(OS)/$(ARCH)
+OUT_DIR = bin/$(OS)/v$(VERSION)
 
 # Files
 O_STATE := src/engine/state/stateEngine.o
