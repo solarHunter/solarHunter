@@ -72,7 +72,5 @@ void Engine::Graphics::CTexture::Draw(int id, int x, int y, int w, int h, double
     dest.h = h;
 
     SDL_RendererFlip flipType = SDL_FLIP_NONE;
-
-    SDL_QueryTexture(this -> textures[id], NULL, NULL, &dest.w, &dest.h);
     SDL_RenderCopyEx(this -> renderer, this -> textures[id], NULL, &dest, angle, NULL, flipType );
 }

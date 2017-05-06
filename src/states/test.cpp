@@ -50,7 +50,7 @@ void TestScene::Draw(Engine::State::CStateEngine* game) {
   Crunch.Graphics.Clear();
 
   Crunch.Graphics.Textures.Draw(stars, this -> x - 600, this -> y - 600);
-  Crunch.Graphics.Textures.Draw(spaceship, playerX, playerY, 20, 40, playerRotation);
+  Crunch.Graphics.Textures.Draw(spaceship, playerX, playerY, 66, 80, playerRotation);
 
 
   Crunch.Graphics.Present();
