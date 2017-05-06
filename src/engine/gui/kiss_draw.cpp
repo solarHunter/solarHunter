@@ -171,16 +171,13 @@ int kiss_font_new(kiss_font *font, char *fname, kiss_array *a, int size)
 }
 
 /* SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h) */
-int kiss_init(SDL_Window **window, SDL_Renderer **renderer, kiss_array *a, int w, int h)
+int kiss_init(SDL_Renderer **renderer, kiss_array *a, int w, int h)
 {
   kiss_screen_width = w;
   kiss_screen_height = h;
 
   SDL_StartTextInput();
   kiss_array_new(a);
-
-  kiss_array_append(a, WINDOW_TYPE, *window);
-  kiss_array_append(a, RENDERER_TYPE, renderer);
 
   int r = 0;
   r += kiss_font_new(&kiss_textfont, (char*)"kiss_font.ttf", a, kiss_textfont_size);
@@ -224,6 +221,7 @@ int kiss_clean(kiss_array *a)
     }
   a->length = 0;
   kiss_array_free(a);
+  SDL_StopTextInput();
   return 0;
 }
 

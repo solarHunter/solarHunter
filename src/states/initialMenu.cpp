@@ -19,11 +19,6 @@ void InitialMenuScene::button_exit_event(kiss_button *button, SDL_Event *e, int 
 void InitialMenuScene::Init() {
   std::cout << "Generated menuScene" << std::endl;
 
-  kiss_array_new(&this -> objects);
-  if (kiss_init(&Crunch.Graphics.window, &Crunch.Graphics.renderer, &objects, 320, 120)) {
-    std::cout << "ERROR loading kiss_sdl" << std::endl;
-  }
-
   kiss_window_new(&window, NULL, 0, 0, 0, WINDOW_W, WINDOW_H);
 
   kiss_label_new(
@@ -51,7 +46,6 @@ void InitialMenuScene::Init() {
 };
 
 void InitialMenuScene::Cleanup() {
-  kiss_clean(&objects);
   std::cout << "initialMenu cleanup" << std::endl;
 };
 

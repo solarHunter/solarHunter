@@ -23,7 +23,6 @@ class PauseScene : public Engine::State::CState {
 
   private:
     static PauseScene m_pausescene;
-    kiss_array objects;
     kiss_window window;
     kiss_label label = {0};
     kiss_button button_resume = {0}, button_exit = {0};

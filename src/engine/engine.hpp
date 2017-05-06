@@ -3,13 +3,16 @@
 
 #include "graphics/graphics.hpp"
 #include "state/stateEngine.hpp"
-#include "../engine/gui/kiss_sdl.h"
+#include "gui/gui.hpp"
 
 class CrunchEngine {
   public:
-    CrunchEngine() : Graphics(), State() {};
+    CrunchEngine() : Graphics(), State(), Gui() {
+      this -> Gui.Init(&this -> Graphics.renderer);
+    };
     Engine::Graphics::CGraphics Graphics;
     Engine::State::CStateEngine State;
+    Engine::Gui::CGui Gui;
 };
 extern CrunchEngine Crunch;
 
