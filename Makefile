@@ -35,7 +35,7 @@ O_GRAPHICS := src/engine/graphics/graphics.o src/engine/graphics/textures.o
 O_GUI := src/engine/gui/kiss_general.o src/engine/gui/kiss_posix.o src/engine/gui/kiss_widgets.o src/engine/gui/kiss_draw.o
 O_ENGINE := $(O_GRAPHICS) $(O_GUI) $(O_STATE)
 
-OBJS := src/main.cpp src/states/initialMenu.cpp src/states/test.cpp
+OBJS := src/main.cpp src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp
 
 
 all: bindir engine build mediadir cleanobj

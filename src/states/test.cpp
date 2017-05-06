@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "test.hpp"
+#include "pause.hpp"
 
 TestScene TestScene::m_testscene;
 void TestScene::Init() {
@@ -19,7 +20,8 @@ void TestScene::HandleEvents(Engine::State::CStateEngine* game) {
   if (game -> event.type == SDL_KEYDOWN){
     switch (game -> event.key.keysym.scancode) {
       case 41:
-        game -> Quit();
+        // game -> Quit();
+        game -> PushState(PauseScene::Instance());
         break;
       case 26:
         this -> playerY -= 4;
