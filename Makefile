@@ -33,7 +33,7 @@ OUT_DIR = bin/$(OS)/$(ARCH)
 O_STATE := src/engine/state/stateEngine.o
 O_GRAPHICS := src/engine/graphics/graphics.o src/engine/graphics/textures.o
 O_GUI := src/engine/gui/kiss_general.o src/engine/gui/kiss_posix.o src/engine/gui/kiss_widgets.o src/engine/gui/kiss_draw.o
-O_ENGINE := $(O_GRAPHICS) $(O_GUI) $(O_STATE)
+O_ENGINE := $(O_GRAPHICS) $(O_GUI) $(O_STATE) src/engine/engine.o
 
 OBJS := src/main.cpp src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp
 
