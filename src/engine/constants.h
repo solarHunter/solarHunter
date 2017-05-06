@@ -1,13 +1,9 @@
 #ifndef H_ENGINE_CONSTANTS
 #define H_ENGINE_CONSTANTS
 
-  #define WINDOW_NAME       "engine"
+  #define WINDOW_NAME       "Solar Hunter " VERSION
   #define WINDOW_X          0
   #define WINDOW_Y          0
-
-  #define FULLSCREEN        0
-  #define VSYNC             1
-  #define HW_ACCELERATED    1
 
   #define MEDIA_FOLDER      "media/"
 
