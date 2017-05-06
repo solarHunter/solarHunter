@@ -35,7 +35,8 @@ OUT_DIR = bin/$(OS)/v$(VERSION)
 O_STATE := src/engine/state/stateEngine.o
 O_GRAPHICS := src/engine/graphics/graphics.o src/engine/graphics/textures.o
 O_GUI := src/engine/gui/kiss_general.o src/engine/gui/kiss_posix.o src/engine/gui/kiss_widgets.o src/engine/gui/kiss_draw.o src/engine/gui/gui.o
-O_ENGINE := $(O_GRAPHICS) $(O_GUI) $(O_STATE) src/engine/engine.o
+O_CONFIG := src/engine/config/config.o
+O_ENGINE := $(O_CONFIG) $(O_GRAPHICS) $(O_GUI) $(O_STATE) src/engine/engine.o
 
 OBJS := src/main.cpp src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp
 
@@ -59,6 +60,9 @@ mediadir:
 	cp -rvp ./media $(OUT_DIR)/
 
 bindir: ${OUT_DIR}
+
+conf:
+	cp solarhunter.conf $(OUT_DIR)/
 
 ${OUT_DIR}:
 	${MKDIR_P} ${OUT_DIR}

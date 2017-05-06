@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "../config/config.hpp"
 #include "../constants.h"
 #include "../sdl.h"
 
@@ -31,6 +32,7 @@ namespace Engine {
         SDL_Renderer *renderer;
         CGraphics();
         ~CGraphics();
+        int Init(Engine::Configuration::CConfiguration *conf);
         void Present();
         void Clear();
         CTexture Textures;

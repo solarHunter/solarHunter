@@ -18,7 +18,11 @@ void PauseScene::button_exit_event(kiss_button *button, SDL_Event *e, int *draw,
 
 void PauseScene::Init() {
   std::cout << "Pause start" << std::endl;
-  kiss_window_new(&window, NULL, 0, 0, 0, WINDOW_W, WINDOW_H);
+  kiss_window_new(
+      &window, NULL, 0, 0, 0,
+      atoi(Crunch.Configuration.Options["resolution_x"].c_str()),
+      atoi(Crunch.Configuration.Options["resolution_y"].c_str())
+      );
 
   kiss_label_new(
       &label, &window, message,

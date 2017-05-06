@@ -1,48 +1,57 @@
 #include <iostream>
 #include "graphics.hpp"
 
-Engine::Graphics::CGraphics::CGraphics() : Textures(){
+Engine::Graphics::CGraphics::CGraphics() : Textures(){}
+
+int Engine::Graphics::CGraphics::Init(Engine::Configuration::CConfiguration *conf){
   if (SDL_Init(SDL_INIT_VIDEO) != 0){
     std::cout << "ERROR::SDL_Init: " << SDL_GetError() << std::endl;
-    throw;
+    return 1;
   }
+
+  int resolution_x = atoi(conf -> Options["resolution_x"].c_str());
+  int resolution_y = atoi(conf -> Options["resolution_y"].c_str());
+
+  this -> screen_width = resolution_x;
+  this -> screen_height = resolution_y;
+
+  int hwaccelerated = atoi(conf -> Options["hw_accelerated"].c_str());
+  int vsync = atoi(conf -> Options["vsync"].c_str());
+  int fullscreen = atoi(conf -> Options["fullscreen"].c_str());
+
 
   this -> window = SDL_CreateWindow(
       WINDOW_NAME,
       WINDOW_X,
       WINDOW_Y,
-      WINDOW_W,
-      WINDOW_H,
+      resolution_x,
+      resolution_y,
       SDL_WINDOW_SHOWN);
   if (!this -> window || this -> window == NULL){
     std::cout << "ERROR::SDL_CreateWindow: " << SDL_GetError() << std::endl; SDL_Quit();
-    throw;
+    return 1;
   }
 
   unsigned int rendererFlags = 0;
-  if (HW_ACCELERATED) rendererFlags |= SDL_RENDERER_ACCELERATED;
-  if (VSYNC) rendererFlags |= SDL_RENDERER_PRESENTVSYNC;
+
+  if (hwaccelerated) rendererFlags |= SDL_RENDERER_ACCELERATED;
+  if (vsync) rendererFlags |= SDL_RENDERER_PRESENTVSYNC;
 
   this -> renderer = SDL_CreateRenderer(this -> window, -1, rendererFlags);
   if (!this -> renderer){
 
     SDL_DestroyWindow(this -> window);
     SDL_Quit();
-    throw;
+    return 1;
   }
   if (!this -> renderer || this -> renderer == NULL) {
     std::cout << "No renderer" << std::endl;
   }
 
-  if (FULLSCREEN) {
+  if (fullscreen) {
     SDL_SetWindowFullscreen(this -> window, SDL_WINDOW_FULLSCREEN);
     SDL_ShowCursor(true);
   }
-
-  SDL_DisplayMode DM;
-  SDL_GetCurrentDisplayMode(0, &DM);
-  this -> screen_width = DM.w;
-  this -> screen_height = DM.h;
 
   this -> Textures.Init(&renderer);
   std::cout << "Graphics::renderer " << renderer << std::endl;
@@ -53,7 +62,7 @@ Engine::Graphics::CGraphics::CGraphics() : Textures(){
     SDL_DestroyRenderer(this -> renderer);
     SDL_DestroyWindow(this -> window);
     SDL_Quit();
-    throw;
+    return 1;
   }
 
   if(TTF_Init() != 0){
@@ -62,9 +71,10 @@ Engine::Graphics::CGraphics::CGraphics() : Textures(){
     SDL_DestroyWindow(this -> window);
     IMG_Quit();
     SDL_Quit();
-    throw;
+    return 1;
   }
   std::cout << "Graphics::Init" << std::endl;
+  return 0;
 }
 
 Engine::Graphics::CGraphics::~CGraphics() {

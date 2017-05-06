@@ -21,7 +21,11 @@ void InitialMenuScene::Init() {
 
   background = Crunch.Graphics.Textures.Load("./media/background.jpg");
 
-  kiss_window_new(&window, NULL, 0, 0, 0, WINDOW_W, WINDOW_H);
+  kiss_window_new(
+      &window, NULL, 0, 0, 0,
+      atoi(Crunch.Configuration.Options["resolution_x"].c_str()),
+      atoi(Crunch.Configuration.Options["resolution_y"].c_str())
+      );
 
   kiss_label_new(
       &label, &window, message,
