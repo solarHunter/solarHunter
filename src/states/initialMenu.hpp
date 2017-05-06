@@ -24,6 +24,7 @@ class InitialMenuScene : public Engine::State::CState {
 
   private:
     static InitialMenuScene m_initialmenuscene;
+    int background;
     kiss_window window;
     kiss_label label = {0};
     kiss_button button_ini = {0}, button_exit = {0};

@@ -33,6 +33,17 @@ Engine::Graphics::CGraphics::CGraphics() : Textures(){
   if (!this -> renderer || this -> renderer == NULL) {
     std::cout << "No renderer" << std::endl;
   }
+
+  if (FULLSCREEN) {
+    SDL_SetWindowFullscreen(this -> window, SDL_WINDOW_FULLSCREEN);
+    SDL_ShowCursor(true);
+  }
+
+  SDL_DisplayMode DM;
+  SDL_GetCurrentDisplayMode(0, &DM);
+  this -> screen_width = DM.w;
+  this -> screen_height = DM.h;
+
   this -> Textures.Init(&renderer);
   std::cout << "Graphics::renderer " << renderer << std::endl;
 

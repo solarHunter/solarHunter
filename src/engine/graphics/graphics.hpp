@@ -34,6 +34,7 @@ namespace Engine {
         void Present();
         void Clear();
         CTexture Textures;
+        int screen_width, screen_height;
     };
 
   }

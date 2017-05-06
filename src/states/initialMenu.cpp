@@ -19,6 +19,8 @@ void InitialMenuScene::button_exit_event(kiss_button *button, SDL_Event *e, int 
 void InitialMenuScene::Init() {
   std::cout << "Generated menuScene" << std::endl;
 
+  background = Crunch.Graphics.Textures.Load("./media/background.jpg");
+
   kiss_window_new(&window, NULL, 0, 0, 0, WINDOW_W, WINDOW_H);
 
   kiss_label_new(
@@ -59,6 +61,7 @@ void InitialMenuScene::Draw(Engine::State::CStateEngine* state) {
   if (draw) {
     Crunch.Graphics.Clear();
     // kiss_window_draw(&window, Crunch.Graphics.renderer);
+    Crunch.Graphics.Textures.Draw(background, 0, 0, Crunch.Graphics.screen_width, Crunch.Graphics.screen_height);
     kiss_label_draw(&label, Crunch.Graphics.renderer);
     kiss_button_draw(&button_ini, Crunch.Graphics.renderer);
     kiss_button_draw(&button_exit, Crunch.Graphics.renderer);
