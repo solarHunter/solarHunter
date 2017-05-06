@@ -5,9 +5,11 @@
 #include "state/stateEngine.hpp"
 #include "../engine/gui/kiss_sdl.h"
 
-namespace Crunch {
-  Engine::Graphics::CGraphics Graphics;
-  Engine::State::CStateEngine State;
-}
+class CrunchEngine {
+  public:
+    CrunchEngine() : Graphics(), State() {};
+    Engine::Graphics::CGraphics Graphics;
+    Engine::State::CStateEngine State;
+};
 
 #endif

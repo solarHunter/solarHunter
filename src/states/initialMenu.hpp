@@ -6,15 +6,15 @@
 
 #include "test.hpp"
 
-void button_ini_event(kiss_button *button, SDL_Event *e, int *draw) {
+void button_ini_event(kiss_button *button, SDL_Event *e, int *draw, Engine::State::CStateEngine* state) {
   if (kiss_button_event(button, e, draw)) {
-    Crunch::State.ChangeState(TestScene::Instance());
+    state -> ChangeState(TestScene::Instance());
   }
 }
 
-void button_exit_event(kiss_button *button, SDL_Event *e, int *draw, Engine::State::CStateEngine* game) {
+void button_exit_event(kiss_button *button, SDL_Event *e, int *draw, Engine::State::CStateEngine* state) {
   if (kiss_button_event(button, e, draw)) {
-    game -> Quit();
+    state -> Quit();
   }
 }
 
@@ -24,7 +24,7 @@ class InitialMenuScene : public Engine::State::CState {
       std::cout << "Generated menuScene" << std::endl;
 
       kiss_array_new(&this -> objects);
-      if (kiss_init(&Crunch::Graphics.window, &Crunch::Graphics.renderer, &objects, 320, 120)) {
+      if (kiss_init(&Crunch.Graphics.window, &Crunch.Graphics.renderer, &objects, 320, 120)) {
         std::cout << "ERROR loading kiss_sdl" << std::endl;
       }
 
@@ -62,25 +62,25 @@ class InitialMenuScene : public Engine::State::CState {
     void Pause() {};
     void Resume() {};
 
-    void HandleEvents(Engine::State::CStateEngine* game) {
-      kiss_window_event(&window, &game -> event, &draw);
-      button_ini_event(&button_ini, &game -> event, &draw);
-      button_exit_event(&button_exit, &game -> event, &draw, game);
+    void HandleEvents(Engine::State::CStateEngine* state) {
+      kiss_window_event(&window, &state -> event, &draw);
+      button_ini_event(&button_ini, &state -> event, &draw, state);
+      button_exit_event(&button_exit, &state -> event, &draw, state);
     };
 
-    void Draw(Engine::State::CStateEngine* game) {
+    void Draw(Engine::State::CStateEngine* state) {
       if (draw) {
-        Crunch::Graphics.Clear();
-        // kiss_window_draw(&window, Crunch::Graphics.renderer);
-        kiss_label_draw(&label, Crunch::Graphics.renderer);
-        kiss_button_draw(&button_ini, Crunch::Graphics.renderer);
-        kiss_button_draw(&button_exit, Crunch::Graphics.renderer);
+        Crunch.Graphics.Clear();
+        // kiss_window_draw(&window, Crunch.Graphics.renderer);
+        kiss_label_draw(&label, Crunch.Graphics.renderer);
+        kiss_button_draw(&button_ini, Crunch.Graphics.renderer);
+        kiss_button_draw(&button_exit, Crunch.Graphics.renderer);
         draw = 0;
-        Crunch::Graphics.Present();
+        Crunch.Graphics.Present();
       }
     };
 
-    void Update(Engine::State::CStateEngine *game) {}
+    void Update(Engine::State::CStateEngine *state) {}
 
     static InitialMenuScene* Instance() {
       return &m_initialmenuscene;
