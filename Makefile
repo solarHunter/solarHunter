@@ -62,7 +62,7 @@ cleanobj:
 	find . -type f -name '*.o' -exec rm {} +
 
 clean: cleanobj
-	rm -rf $(OUT_DIR)
+	rm -rf $(OUT_DIR) src/engine/engine.a
 
 cleanall: cleanobj
 	rm -rf bin
