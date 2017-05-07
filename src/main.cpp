@@ -3,6 +3,7 @@
 #include "states/initialMenu.hpp"
 
 int main() {
+  Crunch.Audio.LoadBacktrack("./media/audio/backtrack.mp3");
   Crunch.State.ChangeState(InitialMenuScene::Instance());
 
   while (Crunch.State.Running()) {

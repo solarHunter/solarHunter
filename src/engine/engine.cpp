@@ -2,8 +2,8 @@
 #include "engine.hpp"
 CrunchEngine Crunch;
 
-CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui() {
-  if (SDL_Init(SDL_INIT_VIDEO) != 0){
+CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui(), Audio() {
+  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0){
     std::cout << "ERROR::SDL_Init: " << SDL_GetError() << std::endl;
     throw;
   }
@@ -75,5 +75,6 @@ CrunchEngine::~CrunchEngine() {
   SDL_DestroyWindow(this -> window);
   IMG_Quit();
   TTF_Quit();
+  Mix_Quit();
   SDL_Quit();
 }

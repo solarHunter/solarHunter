@@ -16,11 +16,11 @@ endif
 VERSION := 0.0.$(shell git rev-list --count origin master)-$(ARCH)
 
 ifeq ($(OS), Darwin)
-SDL_INCLUDE = -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_ttf.framework/Headers
-SDL_LIB = -framework SDL2 -framework SDL2_image -framework SDL2_ttf
+SDL_INCLUDE = -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_ttf.framework/Headers -I/Library/Frameworks/SDL2_mixer.framework/Headers
+SDL_LIB = -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer
 else
 SDL_INCLUDE = -I/usr/include/SDL2
-SDL_LIB = -L/usr/local/lib -lSDL2_image -lSDL2_ttf -lSDL2main -lSDL2
+SDL_LIB = -L/usr/local/lib -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2main -lSDL2
 endif
 
 CXX = g++
@@ -36,7 +36,8 @@ O_STATE := src/engine/state/stateEngine.o
 O_GRAPHICS := src/engine/graphics/graphics.o src/engine/graphics/textures.o
 O_GUI := src/engine/gui/kiss_general.o src/engine/gui/kiss_posix.o src/engine/gui/kiss_widgets.o src/engine/gui/kiss_draw.o src/engine/gui/gui.o
 O_CONFIG := src/engine/config/config.o
-O_ENGINE := $(O_CONFIG) $(O_GRAPHICS) $(O_GUI) $(O_STATE) src/engine/engine.o
+O_AUDIO := src/engine/audio/audio.o
+O_ENGINE := $(O_CONFIG) $(O_GRAPHICS) $(O_GUI) $(O_AUDIO) $(O_STATE) src/engine/engine.o
 
 OBJS := src/main.cpp src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp
 
