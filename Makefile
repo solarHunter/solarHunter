@@ -75,3 +75,6 @@ clean: cleanobj
 
 cleanall: cleanobj
 	rm -rf bin
+
+version:
+	@echo "v$(VERSION)"
