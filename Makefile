@@ -18,9 +18,11 @@ VERSION := 0.0.$(shell git rev-list --count origin master)-$(ARCH)
 ifeq ($(OS), Darwin)
 SDL_INCLUDE = -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_ttf.framework/Headers -I/Library/Frameworks/SDL2_mixer.framework/Headers
 SDL_LIB = -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer
+ENGINE_LD = src/engine/engine.a
 else
-SDL_INCLUDE = -I/usr/include/SDL2
-SDL_LIB = -L/usr/local/lib -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2main -lSDL2
+SDL_INCLUDE = $(shell sdl2-config --cflags)
+SDL_LIB = $(shell sdl2-config --libs) -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2main
+ENGINE_LD = -L./src/engine -l:engine.a
 endif
 
 CXX = g++
@@ -49,10 +51,10 @@ engine: $(O_ENGINE)
 	ar cr src/engine/engine.a $^
 
 build:
-	g++ $(CXXFLAGS) src/engine/engine.a $(OBJS) $(SDL_LIB) -o $(OUT_DIR)/$(EXE)
+	g++ $(CXXFLAGS) $(OBJS) $(ENGINE_LD) $(SDL_LIB) -o $(OUT_DIR)/$(EXE)
 
 debug: 
-	g++ -g $(CXXFLAGS) src/engine/engine.a $(OBJS) $(SDL_LIB) -o $(OUT_DIR)/$(EXE)
+	g++ -g $(CXXFLAGS) $(OBJS) $(ENGINE_LD) $(SDL_LIB) -o $(OUT_DIR)/$(EXE)
 
 %.o: %.c
 	$(CXX) -c $(CXXFLAGS) $< -o $@
