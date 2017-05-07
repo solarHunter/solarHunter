@@ -9,7 +9,7 @@
 TestScene TestScene::m_testscene;
 void TestScene::Init() {
   std::cout << "Generated TestScene" << std::endl;
-  stars = Crunch.Graphics.Textures.Load("./media/stars.png");
+  stars = Crunch.Graphics.Textures.Load("./media/universe.jpg");
   spaceship = Crunch.Graphics.Textures.Load("./media/spaceship.png");
 
   playerX = Crunch.screen_width / 2 - 30;
@@ -49,7 +49,7 @@ void TestScene::HandleEvents(Engine::State::CStateEngine* game) {
 void TestScene::Draw(Engine::State::CStateEngine* game) {
   Crunch.Graphics.Clear();
 
-  Crunch.Graphics.Textures.Draw(stars, this -> x - 600, this -> y - 600);
+  Crunch.Graphics.Textures.Draw(stars, this -> x, this -> y, Crunch.screen_width, Crunch.screen_height);
   Crunch.Graphics.Textures.Draw(spaceship, playerX, playerY, 66, 80, playerRotation);
 
 
