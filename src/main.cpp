@@ -10,6 +10,4 @@ int main() {
     Crunch.State.Update();
     Crunch.State.Draw();
   }
-
-  Crunch.State.Cleanup();
 }

@@ -65,7 +65,7 @@ void InitialMenuScene::Draw(Engine::State::CStateEngine* state) {
   if (draw) {
     Crunch.Graphics.Clear();
     // kiss_window_draw(&window, Crunch.Graphics.renderer);
-    Crunch.Graphics.Textures.Draw(background, 0, 0, Crunch.Graphics.screen_width, Crunch.Graphics.screen_height);
+    Crunch.Graphics.Textures.Draw(background, 0, 0, Crunch.screen_width, Crunch.screen_height);
     kiss_label_draw(&label, Crunch.Graphics.renderer);
     kiss_button_draw(&button_ini, Crunch.Graphics.renderer);
     kiss_button_draw(&button_exit, Crunch.Graphics.renderer);

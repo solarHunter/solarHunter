@@ -10,7 +10,8 @@ namespace Engine {
     class CGui {
       public:
         CGui();
-        ~CGui();
+        ~CGui() {};
+        void Cleanup();
         int Init(SDL_Renderer **renderer, Engine::Configuration::CConfiguration *conf);
         kiss_array objects;
     };

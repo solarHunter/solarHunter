@@ -12,8 +12,8 @@ void TestScene::Init() {
   stars = Crunch.Graphics.Textures.Load("./media/stars.png");
   spaceship = Crunch.Graphics.Textures.Load("./media/spaceship.png");
 
-  playerX = Crunch.Graphics.screen_width / 2 - 30;
-  playerY = Crunch.Graphics.screen_height / 2 - 45;
+  playerX = Crunch.screen_width / 2 - 30;
+  playerY = Crunch.screen_height / 2 - 45;
 };
 
 void TestScene::HandleEvents(Engine::State::CStateEngine* game) {

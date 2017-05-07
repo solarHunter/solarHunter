@@ -28,15 +28,13 @@ namespace Engine {
 
     class CGraphics {
       public:
-        SDL_Window *window;
         SDL_Renderer *renderer;
         CGraphics();
         ~CGraphics();
-        int Init(Engine::Configuration::CConfiguration *conf);
+        int Init(SDL_Window **window, Engine::Configuration::CConfiguration *conf);
         void Present();
         void Clear();
         CTexture Textures;
-        int screen_width, screen_height;
     };
 
   }

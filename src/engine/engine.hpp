@@ -8,14 +8,17 @@
 
 class CrunchEngine {
   public:
-    CrunchEngine() : Configuration(), Graphics(), State(), Gui() {
-      this -> Graphics.Init(&Configuration);
-      this -> Gui.Init(&this -> Graphics.renderer, &Configuration);
-    };
+    CrunchEngine();
+    ~CrunchEngine();
     Engine::Configuration::CConfiguration Configuration;
     Engine::Graphics::CGraphics Graphics;
     Engine::State::CStateEngine State;
     Engine::Gui::CGui Gui;
+    SDL_Window *window;
+    int screen_width, screen_height;
+
+  private:
+    void Cleanup();
 };
 extern CrunchEngine Crunch;
 
