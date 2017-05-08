@@ -29,9 +29,12 @@ namespace Engine {
     class CGraphics {
       public:
         SDL_Renderer *renderer;
+        SDL_Window **window;
         CGraphics();
         ~CGraphics();
+
         int Init(SDL_Window **window, Engine::Configuration::CConfiguration *conf);
+        void setFullscreen(int f);
         void Present();
         void Clear();
         CTexture Textures;

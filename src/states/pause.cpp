@@ -34,7 +34,7 @@ void PauseScene::Init() {
   label.textcolor.b = 255;
 
   kiss_button_new(
-      &button_resume, &window, (char*)"CONTINUAR",
+      &button_resume, &window, (char*)"RESUME",
       window.rect.w / 2 - kiss_normal.w / 2,
       label.rect.y + kiss_textfont.fontheight + kiss_normal.h
       );

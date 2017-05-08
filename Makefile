@@ -41,7 +41,7 @@ O_CONFIG := src/engine/config/config.o
 O_AUDIO := src/engine/audio/audio.o
 O_ENGINE := $(O_CONFIG) $(O_GRAPHICS) $(O_GUI) $(O_AUDIO) $(O_STATE) src/engine/engine.o
 
-OBJS := src/main.cpp src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp
+OBJS := src/main.cpp src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp src/states/options.cpp
 
 
 all: bindir engine build mediadir cleanobj

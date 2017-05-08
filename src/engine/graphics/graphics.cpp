@@ -13,6 +13,7 @@ int Engine::Graphics::CGraphics::Init(SDL_Window **window, Engine::Configuration
   if (hwaccelerated) rendererFlags |= SDL_RENDERER_ACCELERATED;
   if (vsync) rendererFlags |= SDL_RENDERER_PRESENTVSYNC;
 
+  this -> window = window;
   this -> renderer = SDL_CreateRenderer(*window, -1, rendererFlags);
   if (!this -> renderer || this -> renderer == NULL) {
     std::cout << "No renderer " << SDL_GetError() << std::endl;
@@ -27,6 +28,11 @@ int Engine::Graphics::CGraphics::Init(SDL_Window **window, Engine::Configuration
 Engine::Graphics::CGraphics::~CGraphics() {
   SDL_DestroyRenderer(this -> renderer);
   std::cout << "Graphics::Cleanup" << std::endl;
+}
+
+void Engine::Graphics::CGraphics::setFullscreen(int f) {
+    SDL_SetWindowFullscreen(*this -> window, f == 1 ? SDL_WINDOW_FULLSCREEN : 0);
+    SDL_ShowCursor(true);
 }
 
 void Engine::Graphics::CGraphics::Clear() {

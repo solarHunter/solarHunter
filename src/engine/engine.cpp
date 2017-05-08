@@ -41,11 +41,6 @@ CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui(), Audi
     std::cout << "ERROR::SDL_CreateWindow: " << SDL_GetError() << std::endl; SDL_Quit();
     throw;
   }
-  int fullscreen = atoi(this -> Configuration.Options["fullscreen"].c_str());
-  if (fullscreen) {
-    SDL_SetWindowFullscreen(this -> window, SDL_WINDOW_FULLSCREEN);
-    SDL_ShowCursor(true);
-  }
 
   if (this -> Graphics.Init(&this -> window, &Configuration) != 0) {
     std::cout << "ERROR initializing graphics " << SDL_GetError() << std::endl;
@@ -54,6 +49,10 @@ CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui(), Audi
     TTF_Quit();
     SDL_Quit();
     throw;
+  }
+  int fullscreen = atoi(this -> Configuration.Options["fullscreen"].c_str());
+  if (fullscreen) {
+    this -> Graphics.setFullscreen(1);
   }
 
   if (this -> Gui.Init(&this -> Graphics.renderer, &Configuration) != 0) {
