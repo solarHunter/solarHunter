@@ -17,6 +17,10 @@ void TestScene::Init() {
 };
 
 void TestScene::HandleEvents(Engine::State::CStateEngine* game) {
+  dxRotation = game -> cursorX - playerX;
+  dyRotation = game -> cursorY - playerY;
+  playerRotation = (atan2(dxRotation, -dyRotation)) * 180 / PI;
+
   if (game -> event.type == SDL_KEYDOWN){
     switch (game -> event.key.keysym.scancode) {
       case 41:
@@ -56,9 +60,4 @@ void TestScene::Draw(Engine::State::CStateEngine* game) {
   Crunch.Graphics.Present();
 };
 
-void TestScene::Update(Engine::State::CStateEngine *game) {
-  SDL_GetMouseState(&cursorX, &cursorY);
-  dxRotation = cursorX - playerX;
-  dyRotation = cursorY - playerY;
-  playerRotation = (atan2(dxRotation, -dyRotation)) * 180 / PI;
-}
+void TestScene::Update(Engine::State::CStateEngine *game) { }

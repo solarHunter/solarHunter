@@ -46,6 +46,7 @@ void Engine::State::CStateEngine::PopState() {
 
 
 void Engine::State::CStateEngine::HandleEvents() {
+  SDL_GetMouseState(&this -> cursorX, &this -> cursorY);
   while (SDL_PollEvent(&this -> event)) {
     if (this -> event.type == SDL_QUIT) { this -> Quit(); }
     this -> states.back() -> HandleEvents(this);

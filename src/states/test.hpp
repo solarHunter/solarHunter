@@ -28,8 +28,6 @@ class TestScene : public Engine::State::CState {
     int x, y;
     int playerX;
     int playerY;
-    int cursorX;
-    int cursorY;
     int playerRotation;
     float dxRotation;
     float dyRotation;

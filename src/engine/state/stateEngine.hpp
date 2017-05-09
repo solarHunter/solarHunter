@@ -25,6 +25,7 @@ namespace Engine {
         void Quit() { m_running = false; }
 
         SDL_Event event;
+        int cursorX, cursorY;
 
       private:
         std::vector<CState*> states;
