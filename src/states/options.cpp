@@ -33,21 +33,21 @@ void OptionsScene::button_video_save_event(kiss_button *button, SDL_Event *e, in
   if (kiss_button_event(button, e, draw)) {
     int index = video_resolutions.textbox.firstline + video_resolutions.textbox.selectedline;
     if (index >= 0) {
-      Crunch.Configuration.Options["resolution_x"] = std::to_string(sresolutions[index].x);
-      Crunch.Configuration.Options["resolution_y"] = std::to_string(sresolutions[index].y);
+      Crunch.Configuration.General["resolution_x"] = std::to_string(sresolutions[index].x);
+      Crunch.Configuration.General["resolution_y"] = std::to_string(sresolutions[index].y);
       needRestart = 1;
     }
     std::string parsed_vsync = std::to_string(video_vsync_select.selected);
-    if (parsed_vsync != Crunch.Configuration.Options["vsync"]) {
-      Crunch.Configuration.Options["vsync"] = parsed_vsync;
+    if (parsed_vsync != Crunch.Configuration.General["vsync"]) {
+      Crunch.Configuration.General["vsync"] = parsed_vsync;
       needRestart = 1;
     }
     std::string parsed_fullscreen = std::to_string(video_fullscreen_select.selected);
-    if (parsed_fullscreen != Crunch.Configuration.Options["fullscreen"]) {
-      Crunch.Configuration.Options["fullscreen"] = parsed_fullscreen;
+    if (parsed_fullscreen != Crunch.Configuration.General["fullscreen"]) {
+      Crunch.Configuration.General["fullscreen"] = parsed_fullscreen;
       Crunch.Graphics.setFullscreen(video_fullscreen_select.selected);
     }
-    Crunch.Configuration.Save(Crunch.Configuration.options_path, Crunch.Configuration.Options);
+    Crunch.Configuration.Save(Engine::Path::configuration_file, Crunch.Configuration.General);
     if (needRestart) {
       main_window.visible = 0;
       video_window.visible = 0;
@@ -75,8 +75,8 @@ void OptionsScene::Init() {
   // Main window
   kiss_window_new(
       &main_window, NULL, 0, 0, 0,
-      atoi(Crunch.Configuration.Options["resolution_x"].c_str()),
-      atoi(Crunch.Configuration.Options["resolution_y"].c_str())
+      Crunch.screen_width,
+      Crunch.screen_height
       );
 
   kiss_label_new(
@@ -105,8 +105,8 @@ void OptionsScene::Init() {
   // Video window
   kiss_window_new(
       &video_window, NULL, 0, 0, 0,
-      atoi(Crunch.Configuration.Options["resolution_x"].c_str()),
-      atoi(Crunch.Configuration.Options["resolution_y"].c_str())
+      Crunch.screen_width,
+      Crunch.screen_height
       );
 
   kiss_label_new(
@@ -127,7 +127,7 @@ void OptionsScene::Init() {
   int combobox_height = 96;
   int off = (combobox_width + kiss_up.w - kiss_edge);
 
-  char *res_ini = (char*)(Crunch.Configuration.Options["resolution_x"] + "x" + Crunch.Configuration.Options["resolution_y"]).c_str();
+  char *res_ini = (char*)(std::to_string(Crunch.screen_width) + "x" + std::to_string(Crunch.screen_height)).c_str();
   kiss_combobox_new(&video_resolutions, &video_window,
       res_ini,
       &resolutions,
@@ -150,7 +150,7 @@ void OptionsScene::Init() {
       video_fullscreen_label.rect.x + combobox_width + kiss_up.w - kiss_edge - kiss_selected.w,
       video_resolutions.entry.rect.y + kiss_textfont.fontheight + kiss_normal.h
       );
-  video_fullscreen_select.selected = atoi(Crunch.Configuration.Options["fullscreen"].c_str());
+  video_fullscreen_select.selected = atoi(Crunch.Configuration.General["fullscreen"].c_str());
   // END TOGGLE FULLSCREEN
 
   // TOGGLE VSYNC
@@ -167,7 +167,7 @@ void OptionsScene::Init() {
       video_vsync_label.rect.x + combobox_width + kiss_up.w - kiss_edge - kiss_selected.w,
       video_fullscreen_select.rect.y + kiss_textfont.fontheight + kiss_normal.h
       );
-  video_vsync_select.selected = atoi(Crunch.Configuration.Options["vsync"].c_str());
+  video_vsync_select.selected = atoi(Crunch.Configuration.General["vsync"].c_str());
   // END TOGGLE VSYNC
 
   kiss_button_new(
@@ -187,8 +187,8 @@ void OptionsScene::Init() {
   // Restart needed window
   kiss_window_new(
       &needRestart_window, NULL, 0, 0, 0,
-      atoi(Crunch.Configuration.Options["resolution_x"].c_str()),
-      atoi(Crunch.Configuration.Options["resolution_y"].c_str())
+      Crunch.screen_width,
+      Crunch.screen_height
       );
 
   kiss_label_new(
@@ -201,7 +201,7 @@ void OptionsScene::Init() {
   needRestart_label.textcolor.b = 255;
 
   kiss_button_new(
-      &button_restart, &needRestart_window, (char*)"EXIT",
+      &button_restart, &needRestart_window, (char*)"BACK",
       needRestart_window.rect.w / 2 - kiss_normal.w / 2,
       needRestart_label.rect.y + kiss_textfont.fontheight + kiss_normal.h
       );

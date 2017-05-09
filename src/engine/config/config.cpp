@@ -6,7 +6,7 @@
 #include "config.hpp"
 
 Engine::Configuration::CConfiguration::CConfiguration() {
-  this -> Load(this -> options_path, this -> Options);
+  this -> Load(Engine::Path::configuration_file, this -> General);
 }
 
 int Engine::Configuration::CConfiguration::Load(const char *path, std::map<std::string, std::string> &list) {

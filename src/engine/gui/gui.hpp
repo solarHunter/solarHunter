@@ -1,6 +1,7 @@
 #ifndef H_ENGINE_GUI
 #define H_ENGINE_GUI
 
+#include "../constants.h"
 #include "../sdl.h"
 #include "../config/config.hpp"
 #include "kiss_sdl.h"
@@ -12,7 +13,7 @@ namespace Engine {
         CGui();
         ~CGui() {};
         void Cleanup();
-        int Init(SDL_Renderer **renderer, Engine::Configuration::CConfiguration *conf);
+        int Init(SDL_Renderer **renderer);
         kiss_array objects;
     };
   }

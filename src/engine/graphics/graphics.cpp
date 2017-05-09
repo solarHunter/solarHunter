@@ -5,8 +5,8 @@ Engine::Graphics::CGraphics::CGraphics() : Textures(){}
 
 int Engine::Graphics::CGraphics::Init(SDL_Window **window, Engine::Configuration::CConfiguration *conf){
 
-  int hwaccelerated = atoi(conf -> Options["hw_accelerated"].c_str());
-  int vsync = atoi(conf -> Options["vsync"].c_str());
+  int hwaccelerated = atoi(conf -> General["hw_accelerated"].c_str());
+  int vsync = atoi(conf -> General["vsync"].c_str());
 
   unsigned int rendererFlags = 0;
 

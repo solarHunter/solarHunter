@@ -1,4 +1,6 @@
 #include "engine/engine.hpp"
+const char *Engine::Path::configuration_file = "./solarhunter.conf";
+CrunchEngine Crunch;
 
 #include "states/initialMenu.hpp"
 

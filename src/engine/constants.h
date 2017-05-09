@@ -4,6 +4,12 @@
   #define WINDOW_NAME       "Solar Hunter " VERSION
   #define WINDOW_X          0
   #define WINDOW_Y          0
+  #define WINDOW_W          800
+  #define WINDOW_H          600
+
+  #define FULLSCREEN        0
+  #define VSYNC             1
+  #define HW_ACCELERATED    1
 
   #define MEDIA_FOLDER      "media/"
 

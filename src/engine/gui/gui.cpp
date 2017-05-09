@@ -10,11 +10,8 @@ void Engine::Gui::CGui::Cleanup() {
   std::cout << "GUI Cleanup" << std::endl;
 }
 
-int Engine::Gui::CGui::Init(SDL_Renderer **renderer, Engine::Configuration::CConfiguration *conf) {
-  int resolution_x = atoi(conf -> Options["resolution_x"].c_str());
-  int resolution_y = atoi(conf -> Options["resolution_y"].c_str());
-
-  if (kiss_init(renderer, &this -> objects, resolution_x, resolution_y)) {
+int Engine::Gui::CGui::Init(SDL_Renderer **renderer) {
+  if (kiss_init(renderer, &this -> objects)) {
     std::cout << "ERROR loading kiss_sdl" << std::endl;
     return 1;
   }

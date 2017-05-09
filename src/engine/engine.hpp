@@ -22,6 +22,7 @@ class CrunchEngine {
   private:
     void Cleanup();
 };
+
 extern CrunchEngine Crunch;
 
 #endif

@@ -1,6 +1,5 @@
 #include <iostream>
 #include "engine.hpp"
-CrunchEngine Crunch;
 
 CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui(), Audio() {
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0){
@@ -12,6 +11,7 @@ CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui(), Audi
   if(!(IMG_Init(imgFlags) & imgFlags)){
     std::cout << "ERROR::IMG_Init: " << SDL_GetError() << std::endl;
     SDL_DestroyWindow(this -> window);
+    Mix_Quit();
     SDL_Quit();
     throw;
   }
@@ -20,22 +20,20 @@ CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui(), Audi
     std::cout << "ERROR::TTF_Init: " << SDL_GetError() << std::endl;
     SDL_DestroyWindow(this -> window);
     IMG_Quit();
+    Mix_Quit();
     SDL_Quit();
     throw;
   }
 
-  int resolution_x = atoi(this -> Configuration.Options["resolution_x"].c_str());
-  int resolution_y = atoi(this -> Configuration.Options["resolution_y"].c_str());
-
-  this -> screen_width = resolution_x;
-  this -> screen_height = resolution_y;
+  this -> screen_width = atoi(this -> Configuration.General["resolution_x"].c_str());
+  this -> screen_height = atoi(this -> Configuration.General["resolution_y"].c_str());
 
   this -> window = SDL_CreateWindow(
       WINDOW_NAME,
       WINDOW_X,
       WINDOW_Y,
-      resolution_x,
-      resolution_y,
+      this -> screen_width,
+      this -> screen_height,
       SDL_WINDOW_SHOWN);
   if (!this -> window || this -> window == NULL){
     std::cout << "ERROR::SDL_CreateWindow: " << SDL_GetError() << std::endl; SDL_Quit();
@@ -47,19 +45,20 @@ CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui(), Audi
     SDL_DestroyWindow(this -> window);
     IMG_Quit();
     TTF_Quit();
+    Mix_Quit();
     SDL_Quit();
     throw;
   }
-  int fullscreen = atoi(this -> Configuration.Options["fullscreen"].c_str());
-  if (fullscreen) {
+  if (atoi(this -> Configuration.General["fullscreen"].c_str())) {
     this -> Graphics.setFullscreen(1);
   }
 
-  if (this -> Gui.Init(&this -> Graphics.renderer, &Configuration) != 0) {
+  if (this -> Gui.Init(&this -> Graphics.renderer) != 0) {
     std::cout << "ERROR initializing graphics " << SDL_GetError() << std::endl;
     SDL_DestroyWindow(this -> window);
     IMG_Quit();
     TTF_Quit();
+    Mix_Quit();
     SDL_Quit();
     throw;
   }

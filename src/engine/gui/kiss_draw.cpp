@@ -171,11 +171,8 @@ int kiss_font_new(kiss_font *font, char *fname, kiss_array *a, int size)
 }
 
 /* SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h) */
-int kiss_init(SDL_Renderer **renderer, kiss_array *a, int w, int h)
+int kiss_init(SDL_Renderer **renderer, kiss_array *a)
 {
-  kiss_screen_width = w;
-  kiss_screen_height = h;
-
   SDL_StartTextInput();
   kiss_array_new(a);
 

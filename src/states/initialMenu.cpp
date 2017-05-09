@@ -30,8 +30,8 @@ void InitialMenuScene::Init() {
 
   kiss_window_new(
       &window, NULL, 0, 0, 0,
-      atoi(Crunch.Configuration.Options["resolution_x"].c_str()),
-      atoi(Crunch.Configuration.Options["resolution_y"].c_str())
+      Crunch.screen_width,
+      Crunch.screen_height
       );
 
   kiss_label_new(
