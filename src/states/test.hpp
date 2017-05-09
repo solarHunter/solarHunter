@@ -2,6 +2,7 @@
 #define H_STATES_TESTSCENE
 
 #include "../engine/engine.hpp"
+#include "../entities/player.hpp"
 
 class TestScene : public Engine::State::CState {
   public:
@@ -24,13 +25,9 @@ class TestScene : public Engine::State::CState {
 
   private:
     static TestScene m_testscene;
-    int stars, spaceship;
+    int stars;
     int x, y;
-    int playerX;
-    int playerY;
-    int playerRotation;
-    float dxRotation;
-    float dyRotation;
+    CPlayer player;
 };
 
 #endif
