@@ -44,8 +44,8 @@ O_ENGINE := $(O_CONFIG) $(O_GRAPHICS) $(O_GUI) $(O_AUDIO) $(O_STATE) src/engine/
 OBJS := src/main.cpp src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp src/states/options.cpp
 
 
-all: bindir engine build mediadir cleanobj
-keep: bindir engine build mediadir
+all: bindir engine build conf mediadir cleanobj
+keep: bindir engine build conf mediadir
 
 engine: $(O_ENGINE)
 	ar cr src/engine/engine.a $^
