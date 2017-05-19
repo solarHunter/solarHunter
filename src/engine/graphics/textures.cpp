@@ -16,17 +16,24 @@ Engine::Graphics::CTexture::~CTexture() {
   std::cout << "Textures::Cleanup " << this -> textures.size() << " textures remaining" << std::endl;
 }
 
-void Engine::Graphics::CTexture::Init(SDL_Renderer **renderer) {
+void Engine::Graphics::CTexture::Init(SDL_Renderer **renderer, Engine::Media::ImageList *images) {
   this -> renderer = *renderer;
+  this -> images = images;
   if (!this -> renderer || this -> renderer == NULL) {
     std::cout << "No renderer" << std::endl;
   }
   std::cout << "Textures::renderer " << this -> renderer << std::endl;
 }
 
-int Engine::Graphics::CTexture::Load(const char *path) {
-  SDL_Texture* texture = nullptr;
-  texture = IMG_LoadTexture(renderer, path);
+int Engine::Graphics::CTexture::Load(const char *name) {
+  int exists = this -> images -> count("ship");
+  if (!exists) {
+    std::cout << "ERROR: No loaded image for " << name << std::endl;
+    return -1;
+  }
+
+  SDL_Texture *texture = nullptr;
+  texture = SDL_CreateTextureFromSurface(renderer, (*this -> images)[name]);
   if (!texture || texture == NULL){
     std::cout << "ERROR::IMG_LoadTexture: " << SDL_GetError() << std::endl;
     SDL_DestroyTexture(texture);

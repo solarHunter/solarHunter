@@ -26,7 +26,11 @@ void InitialMenuScene::button_exit_event(kiss_button *button, SDL_Event *e, int 
 void InitialMenuScene::Init() {
   std::cout << "Generated menuScene" << std::endl;
 
-  background = Crunch.Graphics.Textures.Load("./media/background.jpg");
+  Engine::Media::MediaList list;
+  list["initialBackground"] = "./media/background.jpg";
+  Crunch.Media.Load(&list, NULL);
+
+  background = Crunch.Graphics.Textures.Load("initialBackground");
 
   kiss_window_new(
       &window, NULL, 0, 0, 0,

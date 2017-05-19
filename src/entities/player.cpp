@@ -1,7 +1,11 @@
 #include "player.hpp"
 
 CPlayer::CPlayer() {
-  sprite.image = Crunch.Graphics.Textures.Load("./media/spaceship.png");
+  Engine::Media::MediaList list;
+  list["ship"] = "./media/spaceship.png";
+  Crunch.Media.Load(&list, NULL);
+
+  sprite.image = Crunch.Graphics.Textures.Load("ship");
   sprite.frame_width = 66;
   sprite.frame_height = 80;
   x = Crunch.screen_width/2;

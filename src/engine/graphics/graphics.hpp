@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../config/config.hpp"
+#include "../mediamanager/mediamanager.hpp"
 #include "../constants.h"
 #include "../sdl.h"
 
@@ -14,7 +15,7 @@ namespace Engine {
       public:
         CTexture();
         ~CTexture();
-        void Init(SDL_Renderer **renderer);
+        void Init(SDL_Renderer **renderer, Engine::Media::ImageList *images);
 
         int Load(const char *path);
         void Draw(int id);
@@ -23,6 +24,7 @@ namespace Engine {
         void Draw(int id, int x, int y, int w, int h, double angle);
       private:
         SDL_Renderer *renderer;
+        Engine::Media::ImageList *images;
         std::vector<SDL_Texture*> textures;
     };
 
@@ -33,7 +35,7 @@ namespace Engine {
         CGraphics();
         ~CGraphics();
 
-        int Init(SDL_Window **window, Engine::Configuration::CConfiguration *conf);
+        int Init(SDL_Window **window, Engine::Configuration::CConfiguration *conf, Engine::Media::ImageList *images);
         void setFullscreen(int f);
         void Present();
         void Clear();

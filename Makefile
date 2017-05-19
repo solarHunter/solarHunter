@@ -35,15 +35,16 @@ OUT_DIR = bin/$(OS)/v$(VERSION)
 
 # Files
 O_STATE := src/engine/state/stateEngine.o
+O_MEDIA := src/engine/mediamanager/mediamanager.o
 O_GRAPHICS := src/engine/graphics/graphics.o src/engine/graphics/textures.o
 O_GUI := src/engine/gui/kiss_general.o src/engine/gui/kiss_posix.o src/engine/gui/kiss_widgets.o src/engine/gui/kiss_draw.o src/engine/gui/gui.o
 O_CONFIG := src/engine/config/config.o
 O_AUDIO := src/engine/audio/audio.o
-O_ENGINE := $(O_CONFIG) $(O_GRAPHICS) $(O_GUI) $(O_AUDIO) $(O_STATE) src/engine/engine.o
+O_ENGINE := $(O_CONFIG) $(O_MEDIA) $(O_GRAPHICS) $(O_GUI) $(O_AUDIO) $(O_STATE) src/engine/engine.o
 
 
 ENTITIES := src/entities/player.cpp
-STATES := src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp src/states/options.cpp
+STATES := src/states/loading.cpp src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp src/states/options.cpp
 OBJS := src/main.cpp $(ENTITIES) $(STATES)
 
 

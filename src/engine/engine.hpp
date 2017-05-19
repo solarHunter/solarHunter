@@ -1,6 +1,7 @@
 #ifndef H_ENGINE
 #define H_ENGINE
 
+#include "mediamanager/mediamanager.hpp"
 #include "graphics/graphics.hpp"
 #include "state/stateEngine.hpp"
 #include "gui/gui.hpp"
@@ -12,6 +13,7 @@ class CrunchEngine {
     CrunchEngine();
     ~CrunchEngine();
     Engine::Configuration::CConfiguration Configuration;
+    Engine::Media::CMedia Media;
     Engine::Graphics::CGraphics Graphics;
     Engine::State::CStateEngine State;
     Engine::Gui::CGui Gui;

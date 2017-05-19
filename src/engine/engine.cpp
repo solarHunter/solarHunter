@@ -1,7 +1,7 @@
 #include <iostream>
 #include "engine.hpp"
 
-CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui(), Audio() {
+CrunchEngine::CrunchEngine() : Configuration(), Media(), Graphics(), State(), Gui(), Audio() {
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0){
     std::cout << "ERROR::SDL_Init: " << SDL_GetError() << std::endl;
     throw;
@@ -40,7 +40,7 @@ CrunchEngine::CrunchEngine() : Configuration(), Graphics(), State(), Gui(), Audi
     throw;
   }
 
-  if (this -> Graphics.Init(&this -> window, &Configuration) != 0) {
+  if (this -> Graphics.Init(&this -> window, &Configuration, &Media.images) != 0) {
     std::cout << "ERROR initializing graphics " << SDL_GetError() << std::endl;
     SDL_DestroyWindow(this -> window);
     IMG_Quit();

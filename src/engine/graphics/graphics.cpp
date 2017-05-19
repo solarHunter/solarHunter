@@ -3,7 +3,7 @@
 
 Engine::Graphics::CGraphics::CGraphics() : Textures(){}
 
-int Engine::Graphics::CGraphics::Init(SDL_Window **window, Engine::Configuration::CConfiguration *conf){
+int Engine::Graphics::CGraphics::Init(SDL_Window **window, Engine::Configuration::CConfiguration *conf, Engine::Media::ImageList *images){
 
   int hwaccelerated = atoi(conf -> General["hw_accelerated"].c_str());
   int vsync = atoi(conf -> General["vsync"].c_str());
@@ -19,7 +19,7 @@ int Engine::Graphics::CGraphics::Init(SDL_Window **window, Engine::Configuration
     std::cout << "No renderer " << SDL_GetError() << std::endl;
     return 1;
   }
-  this -> Textures.Init(&renderer);
+  this -> Textures.Init(&renderer, images);
 
   std::cout << "Graphics::Init" << std::endl;
   return 0;

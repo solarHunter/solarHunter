@@ -70,7 +70,12 @@ void OptionsScene::button_restart_event(kiss_button *button, SDL_Event *e, int *
 }
 
 void OptionsScene::Init() {
-  background = Crunch.Graphics.Textures.Load("./media/background.jpg");
+
+  Engine::Media::MediaList list;
+  list["initialBackground"] = "./media/background.jpg";
+  Crunch.Media.Load(&list, NULL);
+
+  background = Crunch.Graphics.Textures.Load("initialBackground");
 
   // Main window
   kiss_window_new(

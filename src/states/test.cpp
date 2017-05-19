@@ -8,7 +8,11 @@
 
 TestScene TestScene::m_testscene;
 void TestScene::Init() {
-  stars = Crunch.Graphics.Textures.Load("./media/universe.jpg");
+  Engine::Media::MediaList list;
+  list["gameBackground"] = "./media/universe.jpg";
+  Crunch.Media.Load(&list, NULL);
+
+  stars = Crunch.Graphics.Textures.Load("gameBackground");
 };
 
 void TestScene::HandleEvents(Engine::State::CStateEngine* game) {
