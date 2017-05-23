@@ -3,11 +3,12 @@
 #include "initialMenu.hpp"
 #include "options.hpp"
 #include "test.hpp"
+#include "room.hpp"
 
 InitialMenuScene InitialMenuScene::m_initialmenuscene;
 void InitialMenuScene::button_ini_event(kiss_button *button, SDL_Event *e, int *draw, Engine::State::CStateEngine* state) {
   if (kiss_button_event(button, e, draw)) {
-    state -> ChangeState(TestScene::Instance());
+    state -> ChangeState(RoomScene::Instance());
   }
 }
 

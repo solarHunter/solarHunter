@@ -43,7 +43,7 @@ O_ENGINE := $(O_CONFIG) $(O_GRAPHICS) $(O_GUI) $(O_AUDIO) $(O_STATE) src/engine/
 
 
 ENTITIES := src/entities/player.cpp
-STATES := src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp src/states/options.cpp
+STATES := src/states/initialMenu.cpp src/states/test.cpp src/states/pause.cpp src/states/options.cpp src/states/room.cpp
 OBJS := src/main.cpp $(ENTITIES) $(STATES)
 
 
