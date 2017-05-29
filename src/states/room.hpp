@@ -3,6 +3,7 @@
 
 #include "../engine/engine.hpp"
 #include "../entities/player.hpp"
+#include "../entities/camera.hpp"
 
 class RoomScene : public Engine::State::CState {
   public:
@@ -28,6 +29,7 @@ class RoomScene : public Engine::State::CState {
     int background;
     int x, y, width, height;
     CPlayer player;
+    CCamera camera;
 };
 
 #endif

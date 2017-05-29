@@ -6,8 +6,7 @@ CPlayer::CPlayer() {
   sprite.frame_height = 80;
   x = Crunch.screen_width/2;
   y = Crunch.screen_height/2;
-  cameraW = Crunch.screen_width;
-  cameraH = Crunch.screen_height;
+  roomSize = Crunch.screen_height * 2;
 }
 
 CPlayer::~CPlayer() {}
@@ -36,7 +35,7 @@ void CPlayer::HandleEvents(Engine::State::CStateEngine* game) {
   }
 }
 
-void CPlayer::Update(Engine::State::CStateEngine* game) {
+void CPlayer::Update(Engine::State::CStateEngine* game, CCamera camera) {
   if (KW) velocityY -= thrust;
   if (KD) velocityX += thrust;
   if (KS) velocityY += thrust;
@@ -59,17 +58,20 @@ void CPlayer::Update(Engine::State::CStateEngine* game) {
   if (velocityX < -max_velocity) velocityX = -max_velocity;
   if (velocityY < -max_velocity) velocityY = -max_velocity;
 
-  if (velocityX > 0 && x + sprite.frame_width/2 < Crunch.screen_height * 2.5) {
+  if (velocityX > 0 && (x - sprite.frame_width / 2)  < roomSize) {
     x += velocityX; 
-  } else if (velocityX < 0 && x - sprite.frame_width/2 > 0) {
+  } else if (velocityX < 0 && (x - sprite.frame_width / 2)  > 0) {
     x += velocityX;
   }
 
-  if (velocityY > 0 && y + sprite.frame_height/2 < Crunch.screen_height * 2.5) {
+  if (velocityY > 0 && (y - sprite.frame_height / 2)  < roomSize) {
     y += velocityY;
-  } else if (velocityY < 0 && y - sprite.frame_height/2 > 0) {
+  } else if (velocityY < 0 && (y - sprite.frame_height / 2) > 0) {
     y += velocityY;
   }
+
+  x = x - camera.x;
+  y = y - camera.y;
 }
 
 void CPlayer::Draw() {
@@ -78,26 +80,4 @@ void CPlayer::Draw() {
       x - sprite.frame_width / 2, y - sprite.frame_height / 2,
       sprite.frame_width, sprite.frame_height,
       facingAngle);
-}
-
-int CPlayer::getX() {
-  return x;
-}
-
-int CPlayer::getY() {
-  return y;
-}
-
-void CPlayer::setCamera()
-{
-    cameraX = (x + sprite.frame_width/2) - Crunch.screen_width;
-    cameraY = (y + sprite.frame_height/2) - Crunch.screen_height;
-    
-    if(cameraX < 0) cameraX = 0;    
-    if(cameraY < 0) cameraY = 0;
-    if(cameraX > Crunch.screen_height*2.5 - cameraW) cameraX = Crunch.screen_height*2.5 - cameraW;    
-    if(cameraY > Crunch.screen_height*2.5 - cameraH) cameraY = Crunch.screen_height*2.5 - cameraH;    
-
-    x = x - cameraX;
-    y = y - cameraY;
 }

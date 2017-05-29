@@ -9,9 +9,9 @@
 RoomScene RoomScene::m_roomscene;
 void RoomScene::Init() {
   background = Crunch.Graphics.Textures.Load("./media/universe-big.jpg");
-  width = Crunch.screen_height*2.5;
-  height = Crunch.screen_height*2.5;
-};
+  width = Crunch.screen_width * 2.5;
+  height = Crunch.screen_height * 2.5;
+}
 
 void RoomScene::HandleEvents(Engine::State::CStateEngine* game) {
   if (game -> event.type == SDL_KEYDOWN){
@@ -23,18 +23,18 @@ void RoomScene::HandleEvents(Engine::State::CStateEngine* game) {
     }
   }
   player.HandleEvents(game);
-};
+}
 
 void RoomScene::Draw(Engine::State::CStateEngine* game) {
   Crunch.Graphics.Clear();
 
-  Crunch.Graphics.Textures.Draw(background, this -> x, this -> y, Crunch.screen_width*2.5, Crunch.screen_height*2.5);
-  //player.setCamera();
+  Crunch.Graphics.Textures.Draw(background, -player.x, -player.y, width, height);
+  camera.setCamera(player.x, player.y);
   player.Draw();
 
   Crunch.Graphics.Present();
-};
+}
 
 void RoomScene::Update(Engine::State::CStateEngine *game) {
-  player.Update(game);
+  player.Update(game, camera);
 }

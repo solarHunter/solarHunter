@@ -27,11 +27,11 @@ void TestScene::Draw(Engine::State::CStateEngine* game) {
   Crunch.Graphics.Clear();
 
   Crunch.Graphics.Textures.Draw(stars, this -> x, this -> y, Crunch.screen_width, Crunch.screen_height);
-  player.Draw();
+ //player.Draw();
 
   Crunch.Graphics.Present();
 };
 
 void TestScene::Update(Engine::State::CStateEngine *game) {
-  player.Update(game);
+  //player.Update(game);
 }
